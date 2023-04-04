@@ -21,3 +21,38 @@ class Solution {
     return answer;
      } 
 }
+
+
+--------------------------------------------------------------------------------------------
+큐를 이용한 풀이
+import java.util.*; 
+
+class Solution {
+    public int[] solution(int[] prices) {
+        int[] answer = new int[prices.length];
+        
+        Queue<Integer> queue = new LinkedList<>();
+        for(int i = 0; i < prices.length; i++){
+            queue.offer(prices[i]);
+        }
+        int idx = 0, time = 0;
+        while(!queue.isEmpty()){
+            time = 0;
+            for(int i = idx+1; i < prices.length; i++){
+                if(queue.peek() <= prices[i]){
+                    time++;
+                }
+                else{
+                    time++;
+                    break;
+                }
+            }
+            queue.poll();
+            answer[idx] = time;
+            idx++;
+        }
+        return answer;
+    }
+}
+
+//add는 예외상황에서 throw,offer은 null 이나 false반환
