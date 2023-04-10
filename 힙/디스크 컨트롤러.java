@@ -9,7 +9,7 @@ class Solution {
         int current = 0; //현재 시간
         int i = 0;
         while(i < jobs.length || !pq.isEmpty()) {
-            while(i < jobs.length && jobs[i][0] <= current) {
+            while(i < jobs.length && jobs[i][0] <= current) { //현재 시간에 처리 가능한 작업 큐에 넣음. 짧은 시간 순서대로 정렬(5번째줄)
                 pq.add(new int[] {jobs[i][0], jobs[i][1]});
                 i++;
             }
@@ -18,8 +18,8 @@ class Solution {
                 current = jobs[i][0]; //다음 작업의 시작시간으로 이동
             } else {
                 int[] temp = pq.poll();
-                sum += current + temp[1] - temp[0]; //요청 ~ 종료시간 
-                current += temp[1];
+                sum += current + temp[1] - temp[0]; //현재시간+실행시간-요청시간
+                current += temp[1]; 
             }
         }
         return sum / jobs.length;
