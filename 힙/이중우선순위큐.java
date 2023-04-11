@@ -8,23 +8,21 @@ class Solution {
         
         for(int i = 0; i < operations.length; i++){
             int x = Integer.valueOf(operations[i].substring(2));
-            //System.out.println(operations[i].substring(0,1));
             
-            if (operations[i].substring(0,1) == "I"){ //삽입
-                //System.out.println(x);
+            if(operations[i].substring(0,1).equals("I")){ //삽입
                 minPq.add(x);
                 maxPq.add(x);
             }
-            else if(operations[i].substring(0,1) == "D"){ //삭제
+            else if(operations[i].substring(0,1).equals("D")){ //삭제
                 if(maxPq.isEmpty() || minPq.isEmpty()){ //pq 비어있는 경우
                     continue;
                 }
-                if(operations[i].substring(2) == "1"){ //최댓값 삭제
+                if(operations[i].substring(2,3).equals("1")){ //최댓값 삭제
                     int maxX = maxPq.peek();
                     maxPq.poll();
                     minPq.remove(maxX);
                 }
-                else if (operations[i].substring(2) == "-"){ //최솟값 삭제
+                else if (operations[i].substring(2,3).equals("-")){ //최솟값 삭제
                    int minX = maxPq.peek();
                     minPq.poll();
                     maxPq.remove(minX); 
@@ -45,7 +43,6 @@ class Solution {
 
 
 
-
 /*
 1.최대 최소 삭제 
     -> 큐는 맨 앞의 값을 삭제
@@ -53,4 +50,7 @@ class Solution {
 2. string 을 subString으로 쪼개어 삽입/삭제 구분 or StringTokenizer 사용
 https://jamesdreaming.tistory.com/81
 https://koohee.tistory.com/14
+
+operations[i].substring(0,1) == "I" 인식못함
+-> == 대신 .equals 사용
 */
