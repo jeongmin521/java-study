@@ -1,40 +1,38 @@
 import java.util.*;
 
-import java.util.*;
-
 class Solution {
     public int[] solution(String[] operations) {
         int[] answer = {0,0};
-        PriorityQueue<Integer> priorityQueueWithMax = new PriorityQueue<>(Comparator.reverseOrder());
-        PriorityQueue<Integer> priorityQueueWithMin = new PriorityQueue<>();
-
+        PriorityQueue<Integer> Minpq = new PriorityQueue<>();
+        PriorityQueue<Integer> Maxpq = new PriorityQueue<>(Comparator.reverseOrder());
+        
         for (String operation : operations) {
             String[] splitOther = operation.split(" ");
 
             if (splitOther[0].equals("I")) {
-                priorityQueueWithMax.add(Integer.parseInt(splitOther[1]));
-                priorityQueueWithMin.add(Integer.parseInt(splitOther[1]));
+                Maxpq.add(Integer.parseInt(splitOther[1]));
+                Minpq.add(Integer.parseInt(splitOther[1]));
             }
 
             if (splitOther[0].equals("D")) {
-                if (!priorityQueueWithMax.isEmpty()) {
+                if (!Maxpq.isEmpty()) {
                     if (splitOther[1].equals("1")) {
-                        int max = priorityQueueWithMax.peek();
-                        priorityQueueWithMax.remove(max);
-                        priorityQueueWithMin.remove(max);
+                        int max = Maxpq.peek();
+                        Maxpq.remove(max);
+                        Minpq.remove(max);
 
                     } else {
-                        int min = priorityQueueWithMin.peek();
-                        priorityQueueWithMax.remove(min);
-                        priorityQueueWithMin.remove(min);
+                        int min = Minpq.peek();
+                        Maxpq.remove(min);
+                        Minpq.remove(min);
                     }
                 }
             }
 
         }
-        if (!priorityQueueWithMax.isEmpty()) {
-            answer[0] = priorityQueueWithMax.peek();
-            answer[1] = priorityQueueWithMin.peek();
+        if (!Maxpq.isEmpty()) {
+            answer[0] = Maxpq.peek();
+            answer[1] = Minpq.peek();
 
         }
         return answer;
