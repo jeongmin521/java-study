@@ -8,7 +8,8 @@ class Solution {
             pq.add(scoville[i]);
         }
         
-        /*=for (int i : scoville) pq.add(i);
+        /*
+        =for (int i : scoville) pq.add(i);
         확장된 for문
         for(타입 변수명 : 배열 또는 컬렉션){
             배열 또는 컬렉션에 저장된 값이 매 반복마다 하나씩 순서대로 읽혀져 변수에 저장
