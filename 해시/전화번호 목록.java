@@ -12,3 +12,25 @@ class Solution {
         return true;
     }
 }
+
+
+------------------------------------------------------------------------------------------------------------
+import java.util.*;
+
+class Solution {
+    public boolean solution(String[] phone_book) {
+        
+        for (int i = 0; i < phone_book.length-1; i++){
+            for(int j = i+1; j < phone_book.length; j++){
+                if (phone_book[j].startsWith(phone_book[i])){ //앞 번호가 뒷 번호의 접두어인지 확인
+                    return false;
+                }
+                else
+                    continue;
+            }
+        }
+        return true;
+    }
+}
+
+//sort안하고 이중for문 썼을 때 오류가 나는 이유?
