@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Solution {
-    static boolean[] visited; //방문/미방문
+    static boolean[] visited; //false로 초기화
 	static int answer = 0;
     
 	public static int solution(int k, int[][] dungeons) {
@@ -12,19 +12,17 @@ class Solution {
 	
 	private static int solve(int[][] dungeons, int k, boolean[] visited, int count){
 		for(int i = 0; i < dungeons.length; i++){
-			if(k >= dungeons[i][0] && !visited[i]){ //던전방문
+			if(k >= dungeons[i][0] && visited[i] == false){ //조건을 만족하는 던전 방문
 				visited[i] = true;
 				solve(dungeons,k - dungeons[i][1], visited, count + 1); 
 				visited[i] = false;
 			}
-		}
+		} //재귀를 이용한 완전탐색
 		answer = Math.max(answer, count); //여러 경우의 수 중에서 가장 방문횟수가 높은 것 리턴
 		
 		return answer;
 	}
 }
-
-
 /*
 현재 피로도 k
 dungeons = 던전별 [최소 필요 피로도, 소모 피로도]
@@ -39,4 +37,7 @@ dungeons = 던전별 [최소 필요 피로도, 소모 피로도]
     k -= 소모피로도;
     boolean visited = true;
     count++;
+    
+완전탐색
+https://hongjw1938.tistory.com/78
 */
