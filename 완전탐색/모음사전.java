@@ -34,3 +34,35 @@ class Solution {
         }
     }
 }
+
+
+-----------------------------------------------------------------------------------------------
+    
+import java.util.*;
+
+class Solution {
+    static char[] vowel = {'A','E','I','O','U'};
+    static ArrayList<String> list;
+    
+    public int solution(String word) {
+        list= new ArrayList<>(); //새로운 리스트 생성
+        int answer = 0;
+        
+        combination(0, "");
+        Collections.sort(list); //정렬
+        answer = list.indexOf(word) + 1;
+        
+        return answer;
+    }
+    
+    public void combination(int index, String str){
+        
+        if(index >= 5) {
+            return;
+        }
+        for(int i=0; i < vowel.length; i++){
+            list.add(str + vowel[i]);
+            combination(index + 1, str + vowel[i]);
+        }
+    }
+}
