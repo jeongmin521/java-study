@@ -45,7 +45,7 @@ class Solution {
     static ArrayList<String> list;
     
     public int solution(String word) {
-        list= new ArrayList<>(); //새로운 리스트 생성
+        list = new ArrayList<>(); //새로운 리스트 생성
         int answer = 0;
         
         combination(0, "");
@@ -60,9 +60,15 @@ class Solution {
         if(index >= 5) {
             return;
         }
-        for(int i=0; i < vowel.length; i++){
+        for(int i = 0; i < vowel.length; i++){
             list.add(str + vowel[i]);
             combination(index + 1, str + vowel[i]);
         }
     }
 }
+
+
+/*
+컬렉션 : https://crazykim2.tistory.com/557
+indexOf() : 특정 문자나 문자열이 앞에서부터 처음 발견되는 인덱스 반환. 찾지 못했을 경우 -1 반환
+*/
