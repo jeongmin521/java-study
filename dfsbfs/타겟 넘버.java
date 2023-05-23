@@ -15,7 +15,7 @@ class Solution {
                 cnt++; 
             }//계산결과가 target이면 count+1
         } 
-        else {
+        else { //아직 모든 숫자를 탐색하지 않은 경우
             dfs(numbers, depth + 1, target, sum + numbers[depth]); // 해당 노드의 값을 더하고 다음 숫자 탐색
             dfs(numbers, depth + 1, target, sum - numbers[depth]); // 해당 노드의 값을 빼고 다음 숫자 탐색
             
@@ -26,8 +26,8 @@ class Solution {
 
 /*
 주어진 숫자를 모두 이용해서 target 숫자를 만들기
-+, - 를 사용
-1. 모든 경우의 수를 만든 후 target number이 되는 경우를 count
++, - 를 사용 -> 순서 상관x
+ - 모든 경우의 수를 만든 후 target number이 되는 경우를 count
  - 모든 경우의 수 만들기 dfs(깊이 우선 탐색) : https://codingnojam.tistory.com/44
  - 숫자 앞에 +, - 를 바꾸면서 계산
  
