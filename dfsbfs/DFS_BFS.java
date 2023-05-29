@@ -14,6 +14,19 @@
  */
 
 //DFS
+
+public static void dfs(int node, boolean[] visited) {
+        if(visited[node]) return;
+        
+        visited[node] = true;
+ 
+        for(int nextNode:nodeList[node]) {
+            dfs(nextNode, visited, sb);
+        }
+    }
+
+
+
 class Graph {
 	private int V;
 	private LinkedList<Integer> adj[]; // 링크드리스트의 배열
@@ -60,6 +73,26 @@ BFS
 2. 큐에서 노드를 꺼내 해당 노드의 인접 노드 중에서 방문하지 않은 노드를 모두 큐에 삽입하고 방문 처리
 3. 위의 1~2 반복
 */
+
+	public static void bfs(int node, boolean[] visited) {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        
+        queue.offer(node);
+        
+        while(!queue.isEmpty()) {
+            node = queue.poll();
+            
+            if(visited[node]) continue;
+            
+            visited[node] = true;
+            
+            for(int nextNode:nodeList[node]) {
+                queue.add(nextNode);
+            }
+        }
+    }
+
+
 
 
 import java.util.*;
