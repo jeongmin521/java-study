@@ -13,58 +13,34 @@
  BFS는 여러 드라마를 한 회차씩 보는것
  */
 
-//DFS
+/*DFS 재귀
+1) 탐색하려는 노드의 방문 여부 확인
+2) 탐색하려는 노드의 자식노드들 확인
+3) 자식노드 존재 X -> 탐색종료
+4) 자식노드 존재 o -> 자식노드를 같은 방식으로 탐색
+*/
 
-public static void dfs(int node, boolean[] visited) {
-        if(visited[node]) return;
-        
-        visited[node] = true;
- 
-        for(int nextNode:nodeList[node]) {
-            dfs(nextNode, visited, sb);
-        }
-    }
-
-
-
-class Graph {
-	private int V;
-	private LinkedList<Integer> adj[]; // 링크드리스트의 배열
-	
-	//생성자
-	Graph (int v) {
-		V = v;
-		adj = new LinkedList[v];
-		// v개의 LinkedList 선언 및 생성
-		for (int i = 0; i < v; ++i) {
-			adj[i] = new LinkedList(); 
-		}
+void DFS(int v) { // v를 시작노드로
+	boolean visited[] = new boolean[V]; // 각 노드 방문여부
+	DFSUtil(v, visited);
 	}
-	void addEdge (int v, int w) { // v번째 LinkedList 에 w를 삽입
-		adj[v].add(w); 
-	}
-  
-	// DFS 함수
-	void DFS(int v) { // v를 시작노드로
-		boolean visited[] = new boolean[V]; // 각 노드 방문
-		DFSUtil(v, visited);
-	}
-	// DFS에서 호출되는 함수
-	void DFSUtil(int v, boolean visited[])  {
-		// 현재 노드 방문
-		visited[v] = true;
-		System.out.println(v + " ");
+
+// DFS에서 호출되는 함수
+void DFSUtil(int v, boolean visited[])  {
+	// 현재 노드 방문
+	visited[v] = true;
 		
-		// 방문한 노드와 인접한 모든 노드를 가지고 온다
-		Iterator<Integer> it = adj[v].listIterator();
-		while (it.hasNext()) {
-			int n = it.next();
-			// 방문하지 않은 노드면 해당 노드를 다시 시작 노드로하여 DFSUtil을 호출
-			if (!visited[n])
-				DFSUtil(n, visited); // 재귀호출
+	// 방문한 노드와 인접한 모든 노드를 가지고 온다
+	Iterator<Integer> it = adj[v].listIterator();
+	while (it.hasNext()) {
+		int n = it.next();
+		// 방문하지 않은 노드면 해당 노드를 다시 시작 노드로하여 DFSUtil을 호출
+		if (!visited[n])
+		DFSUtil(n, visited); // 재귀호출
 		}
 	}
 }
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 /*
