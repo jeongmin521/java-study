@@ -34,16 +34,15 @@ class Solution {
             int Y = current[1];
 
             for (int i = 0; i < 4; i++) {
-
                 int nX = X + dx[i];
                 int nY = Y + dy[i];
 
-                // 좌표가 maps에서 벗어날 경우 다음 반복으로 넘어간다
+                // 좌표가 maps에서 벗어날 경우
                 if (nX < 0 || nX > maps.length - 1 || nY < 0 || nY > maps[0].length - 1) {
                     continue;
                 }
 
-                // 아직 방문하지 않았고, 벽이 아닐 경우
+                // 미방문, 이동가능인 경우
                 if (visited[nX][nY] == 0 && maps[nX][nY] == 1) {
                     visited[nX][nY] = visited[X][Y] + 1;
                     q.add(new int[]{nX, nY});
@@ -52,3 +51,13 @@ class Solution {
         }
     }
 }
+
+
+/*
+1. 경로를 담을 Queue를 생성
+2. 시작 위치인 (0, 0)을 담고 방문 체크
+3. Queue에 담긴 경로인 정점 하나를 꺼내고 각각 X좌표와 Y좌표 담기 (nX, nY는 상하좌우로 나아갈 수 있는 좌표)
+4. 좌표가 maps에서 벗어날 경우에는 다음 반복으로 넘어감
+5. 미방문, 이동가능일 경우 경우의 수 +1.
+6. Queue에 새로운 좌표 넣음
+*/
