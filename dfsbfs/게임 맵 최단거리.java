@@ -2,56 +2,53 @@ import java.util.*;
 
 class Solution {
     
-    static final int[] rowArr = new int[]{1, -1, 0, 0}; //좌 우 이동
-    static final int[] colArr = new int[]{0, 0, 1, -1}; //상 하 이동
-    
-    static class Node {
-        final int row;
-        final int col;
-        final int move;
-        
-        public Node(int row, int col, int move){
-            this.row = row;
-            this.col = col;
-            this.move = move;
-        }
-    }
+    int[] dx = {0, 1, -1, 0}; //x축(상,하 이동)
+    int[] dy = {1, 0, 0, -1}; //y축(좌,우 이동)
     
     public int solution(int[][] maps) {
-        int rowLength = maps.length;
-        int colLength = maps[0].length;
-        boolean[][] visited = new boolean[rowLength][colLength]; //방문 여부
         
-        for(int i = 0; i < maps.length; i++) {
-            for(int j = 0; j < maps[i].length; j++) {
-                if(maps[i][j] == 0) {
-                    visited[i][j] = true;
+        int answer = 0;
+
+        int[][] visited = new int[maps.length][maps[0].length];//방문여부
+
+        bfs(maps, visited);
+        answer = visited[maps.length - 1][maps[0].length - 1]; //최종 목적지 좌표
+
+        if (answer == 0) { //최종 도달하지 못한 경우
+            answer = -1;
+        }
+
+        return answer;
+    }
+    
+    public void bfs(int[][] maps, int[][] visited) {
+
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{0, 0}); // Queue에 시작 정점 추가
+        visited[0][0] = 1; //처음 위치 방문처리
+
+        while (!q.isEmpty()) { // 더 나아갈 정점이 없을 때까지 반복
+
+            int[] current = q.poll(); // 정점 하나 꺼내기
+            int X = current[0];
+            int Y = current[1];
+
+            for (int i = 0; i < 4; i++) {
+
+                int nX = X + dx[i];
+                int nY = Y + dy[i];
+
+                // 좌표가 maps에서 벗어날 경우 다음 반복으로 넘어간다
+                if (nX < 0 || nX > maps.length - 1 || nY < 0 || nY > maps[0].length - 1) {
+                    continue;
+                }
+
+                // 아직 방문하지 않았고, 벽이 아닐 경우
+                if (visited[nX][nY] == 0 && maps[nX][nY] == 1) {
+                    visited[nX][nY] = visited[X][Y] + 1;
+                    q.add(new int[]{nX, nY});
                 }
             }
         }
-        
-        
-        Queue<Node> queue = new LinkedList<>();
-        visited[0][0] = true;
-        queue.offer(new Node(0, 0, 1));
-        int min = Integer.MAX_VALUE;
-        while(!queue.isEmpty()) {
-            
-            Node node = queue.poll();
-            
-            for(int i = 0; i < 4; i++) {
-                int row = node.row + rowArr[i], col = node.col + colArr[i];
-                if(rowLength <= row || row < 0 || colLength <= col || col < 0) continue;
-                if(visited[row][col]) continue;
-                
-                visited[row][col] = true;
-                queue.offer(new Node(row, col, node.move+1));
-                if(row == rowLength - 1 && col == colLength - 1) min = Math.min(min, node.move + 1);
-            }
-         
-        }
-         
-        return  min == Integer.MAX_VALUE ? -1 : min;
     }
-   
 }
