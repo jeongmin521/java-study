@@ -1,13 +1,12 @@
 //DFS
 
-import java.util.*;
 class Solution {
     public int solution(int n, int[][] computers) {
         int answer = 0;
         
         int length = computers.length;
 
-        int [] visited = new int[length];
+        int [] visited = new int[length]; //방문여부
 
         for(int i = 0; i < length; i++){
             if (visited[i] == 0) {
@@ -18,20 +17,19 @@ class Solution {
 
         return answer;
     }
+    
     public void dfs(int node, int[][]computers, int[]visited) {
 
-        visited[node] = 1;
+        visited[node] = 1; //현위치 방문처리
 
         for(int i = 0 ; i < computers.length; i++) {
-            if (visited[i] == 0 && computers[node][i] == 1) {
-                dfs(i,computers, visited);
+            if (visited[i] == 0 && computers[node][i] == 1) { //미방문이고 현재 노드와 연결되어있음
+                dfs(i, computers, visited);
             }
         }
         return;
     }
 }
-
-
 
 ---------------------------------------------------------------------------------------------
 //BFS  
