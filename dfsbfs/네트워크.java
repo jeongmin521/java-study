@@ -1,35 +1,39 @@
 //DFS
 
-class Solution {
-    public int solution(int n, int[][] computers) {
-        int answer = 0;
-        
-        int length = computers.length;
-
-        int [] visited = new int[length]; //방문여부
-
-        for(int i = 0; i < length; i++){
-            if (visited[i] == 0) {
-                dfs(i, computers, visited);
-                answer++;
-            }
-        }
-
-        return answer;
-    }
+public class Solution {
     
-    public void dfs(int node, int[][]computers, int[]visited) {
+  public int solution(int n, int[][] computers) {
+    int answer = 0;
+    boolean[] visited = new boolean[n]; //모든 요소는 false
 
-        visited[node] = 1; //현위치 방문처리
-
-        for(int i = 0 ; i < computers.length; i++) {
-            if (visited[i] == 0 && computers[node][i] == 1) { //미방문이고 현재 노드와 연결되어있음
-                dfs(i, computers, visited);
-            }
-        }
-        return;
+    for (int i = 0; i < n; i++) {
+      if (!visited[i]) { //for문을 돌며 visited가 flase인 경우(미방문)
+        dfs(computers, i, visited);
+        answer++;
+      }
     }
+
+    return answer;
+  }
+
+  boolean[] dfs(int[][] computers, int i, boolean[] visited) {
+    visited[i] = true; //방문처리
+
+    for (int j = 0; j < computers.length; j++) {
+      if (i != j && computers[i][j] == 1 && visited[j] == false) { 
+        visited = dfs(computers, j, visited);
+      }
+    }
+    return visited;
+  }
 }
+    
+/*
+각 노드를 돌며 연결되어있는지 여부를 확인해야함
+연결되어 있는 네트워크 count
+
+자기 자신이 아니고, 연결되어있으며, 미방문인경우
+*/
 
 ---------------------------------------------------------------------------------------------
 //BFS  
