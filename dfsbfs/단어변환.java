@@ -39,4 +39,12 @@ class Solution {
 
 /*
 한 글자 빼고 나머지가 같은 단어를 words에서 찾기
+
+lot -> log -> dog -> cog
+lot -> log -> cog
+이렇게 두가지라고 생각하면
+log의 방문기록은
+이미 둘 중 한번
+방문할때 처리가 되니까
+다시 false로 해줘야함
 */
