@@ -31,7 +31,7 @@ class Solution {
             if (k == begin.length() - 1) {  // 한글자 빼고 같은 경우
                 visited[i] = true; //방문처리
                 dfs(words[i], target, words, cnt + 1);
-                //visited[i] = false; //모든 경우의 수 탐색을 위해 재설정
+                //visited[i] = false; //모든 경우의 수 탐색을 위해 재설정 ??
             }
         }
     }
