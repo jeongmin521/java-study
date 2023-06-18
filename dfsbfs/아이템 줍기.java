@@ -14,8 +14,8 @@ class Solution {
         for(int i = 0; i < rectangle.length; i++){
             int[] data = rectangle[i]; // = for(int[] data:rectangle) 확장된 for문
             
-            for(int j = data[1] * 2; j <= data[3] * 2; j++){
-              for(int k = data[0] * 2; k <= data[2] * 2; k++){
+            for(int j = data[1] * 2; j <= data[3] * 2; j++){ // y축
+              for(int k = data[0] * 2; k <= data[2] * 2; k++){// x축
                     map[j][k] = true; //테두리 포함해서 직사각형 모두 true
               }  
             }
@@ -32,9 +32,8 @@ class Solution {
         //bfs
         Stack<Player> stack = new Stack<>();
         
-        //시작점
         Player p = new Player(start_x,start_y);
-        stack.add(p);
+        stack.add(p);//시작점
         
         List<Integer> result = new ArrayList<>();
         int cnt = 0;
