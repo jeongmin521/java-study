@@ -33,20 +33,20 @@ class Solution {
         Stack<Player> stack = new Stack<>();
         
         Player p = new Player(start_x,start_y);
-        stack.add(p);//시작점
+        stack.add(p);//스택에 시작점을 넣어줌
         
-        List<Integer> result = new ArrayList<>();
+        List<Integer> result = new ArrayList<>(); //결과를 저장할 리스트
         int cnt = 0;
         
         while(true){       
-            if(stack.isEmpty()){ //스택이 비어있으면 (=움직였으면)
-                result.add(cnt); //횟수 추가
+            if(stack.isEmpty()){ //스택이 비어있으면(= 더 이상 움직일 수 x)
+                result.add(cnt); //결과 리스트에 현재 cnt 넣어줌
                 break;
             }
             
-            Player temp = stack.pop(); //스택에서 꺼내줌
+            Player temp = stack.pop(); //스택이 비어있지 않으면 꺼내서
             int x = temp.x;
-            int y = temp.y; 
+            int y = temp.y; //위치를 변경해줌
            
             if(x == end_x && y == end_y){ //도착
                 result.add(cnt);         
@@ -58,10 +58,9 @@ class Solution {
             if(map[y+1][x] == true) stack.add(new Player(x, y + 1));
             if(map[y][x+1] == true) stack.add(new Player(x + 1, y));
             if(map[y-1][x] == true) stack.add(new Player(x, y - 1));
-            if(map[y][x-1] == true) stack.add(new Player(x - 1, y)); //이동할 때 스택에 추가
+            if(map[y][x-1] == true) stack.add(new Player(x - 1, y)); //이동한 경우 새 위치를 스택에 추가
             
-            cnt++;
-            
+            cnt++; //이동 횟수 ++
         }
         
         answer = Math.min(result.get(0)/2, result.get(1)/2-result.get(0)/2); //경우의 수 중 가장 최솟값    
@@ -86,12 +85,15 @@ for (요소타입 변수명: 반복대상) {
 	실행영역;
 }
 
-최단거리 -> BFS
+
 캐릭터의 위치 (characterX, characterY)에서 아이템의 위치(itemX, itemY)
+
 (3,5) -> (3,6) 으로 바로 갈 수 없음
     => 좌표를 두배로 늘려줘서 이 길이 이어져있는지 아닌지 구분
 
 테두리만 이동가능 -> 테두리와 내부를 구분해야함 
     => 좌표를 두배로 늘려준 후 내부를 false
+    
+BFS 를 이용하여 최단거리 구함
 
 */
