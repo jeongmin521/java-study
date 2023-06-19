@@ -29,41 +29,40 @@ class Solution {
             }
         }
     
-        //bfs
-        Stack<Player> stack = new Stack<>();
+        Stack<Player> stack = new Stack<>(); //bfs를 위해 player라는 스택 생성
         
-        Player p = new Player(start_x,start_y);
-        stack.add(p);//스택에 시작점을 넣어줌
+        Player p = new Player(start_x,start_y); //시작점(현위치)
+        stack.add(p);//스택에 추가
         
         List<Integer> result = new ArrayList<>(); //결과를 저장할 리스트
         int cnt = 0;
         
         while(true){       
-            if(stack.isEmpty()){ //스택이 비어있으면(= 더 이상 움직일 수 x)
-                result.add(cnt); //결과 리스트에 현재 cnt 넣어줌
-                break;
+            if(stack.isEmpty()){ //스택이 비어있으면(= 더 이상 움직일 수 x = 한 바퀴를 다 돎 => 전체 길이)
+                result.add(cnt); //전체 길이를 result에 추가
+                break; 
             }
             
-            Player temp = stack.pop(); //스택이 비어있지 않으면 꺼내서
+            Player temp = stack.pop(); //스택이 비어있지 않으면(=이동이 가능하면) 꺼내서
             int x = temp.x;
-            int y = temp.y; //위치를 변경해줌
+            int y = temp.y; //스택에 있던 좌표로 위치를 변경해줌
            
-            if(x == end_x && y == end_y){ //도착
-                result.add(cnt);         
+            if(x == end_x && y == end_y){ //아이템 위치에 도착한 경우
+                result.add(cnt); //움직인 만큼을 결과에 추가
             }
+                       
+            map[y][x] = false; //지난자리 false    
             
-            //지난자리 false               
-            map[y][x] = false;
-            
-            if(map[y+1][x] == true) stack.add(new Player(x, y + 1));
+            if(map[y+1][x] == true) stack.add(new Player(x, y + 1)); //이동이 가능한 경우 찾기
             if(map[y][x+1] == true) stack.add(new Player(x + 1, y));
             if(map[y-1][x] == true) stack.add(new Player(x, y - 1));
-            if(map[y][x-1] == true) stack.add(new Player(x - 1, y)); //이동한 경우 새 위치를 스택에 추가
+            if(map[y][x-1] == true) stack.add(new Player(x - 1, y));
             
             cnt++; //이동 횟수 ++
         }
         
-        answer = Math.min(result.get(0)/2, result.get(1)/2-result.get(0)/2); //경우의 수 중 가장 최솟값    
+        answer = Math.min(result.get(0)/2, result.get(1)/2-result.get(0)/2); //반대 방향으로 출발했을 때 최솟값 
+        //캐릭터위치~아이템거리, 전체 테두리길이 - 캐릭터위치~아이템거리 
         return answer;
     }
     
