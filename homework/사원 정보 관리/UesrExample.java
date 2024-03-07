@@ -60,7 +60,7 @@ public class UserExample {
 		String userpassword = scanner.nextLine();
 		
 		System.out.print("나이: ");
-		int userage = Integer.parseInt(scanner.nextLine());
+		int userage = Integer.parseInt(scanner.nextLine()); // 여기를 만약에 scanner.nextInt(); 로 받으면 email을 안받고 끝나버려서 이렇게 받아줘야함
 		
 		System.out.print("email: ");
 		String useremail = scanner.nextLine();
